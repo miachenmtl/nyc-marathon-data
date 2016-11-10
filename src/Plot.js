@@ -11,9 +11,10 @@ class Plot extends Component {
       hoverinfo: 'x + y + text',
       hoveron: 'points',
       type: 'scatter',
-      mode: 'markers'
+      mode: 'markers',
     },
     layout: {
+      title: "",
       margin: {
         t: "10px"
       },
@@ -21,7 +22,8 @@ class Plot extends Component {
         title: 'Year'
       },
       yaxis: {
-        title: 'Time in Seconds'
+        title: 'Time',
+        tickformat: "%H:%M:%S"
       },
       hovermode: 'closest'
     },
@@ -47,7 +49,7 @@ class Plot extends Component {
     let newNames = [];
     let i;
     if (this.state.zoomedOut) {
-      for (i = 1; i <= 25; i++) {
+      for (i = 1; i <= 100; i++) {
         place.push(i);
       }
       for (i = 0; i < this.state.data.x.length; i++) {
@@ -59,6 +61,7 @@ class Plot extends Component {
       newData.x = place;
       newData.y = newTimes;
       newData.text = newNames;
+      newLayout.title = year;
       newLayout.xaxis.title = "Place";
       this.setState({
         data: newData,
@@ -79,6 +82,7 @@ class Plot extends Component {
       mode: 'markers'
     };
     var newLayout = this.state.layout;
+    newLayout.title = "";
     newLayout.xaxis.title = "Year";
     this.setState({
       data: newData,
